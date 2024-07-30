@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:tictactoe/component/matrix.dart';
+import 'package:tictactoe/pages/menu.dart';
 
 class FriendVsFriend extends StatefulWidget {
   const FriendVsFriend({super.key});
@@ -7,9 +10,12 @@ class FriendVsFriend extends StatefulWidget {
   State<FriendVsFriend> createState() => _FriendVsFriendState();
 }
 
-// Logger logger= Logger();
 
 class _FriendVsFriendState extends State<FriendVsFriend> {
+  Logger logger= Logger();
+  final List<String> _display=['','','','','','','','',''];
+  String _chance= "Player 1(X) or Player 2(O)";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,55 +28,35 @@ class _FriendVsFriendState extends State<FriendVsFriend> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center, 
+        children: [
         //The below will tell us whether it is the player 1 chance or player 2
-        const Text("Player 1(X) or Player 2(O)",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
+        Text(_chance,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
         const SizedBox(height: 20),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GridView.builder(
-              itemCount: 9,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3),
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    // logger.i(index);
-                    print(index);
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 2.0),
-                      color: Colors.amber,
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "O",
-                        style: TextStyle(
-                            fontSize: 72, fontWeight: FontWeight.w900),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
+        Matrix(display: _display, chance: _chance),
         // const SizedBox(height: 30),
-        const Text("Player 1 or 2 Wins!",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
+        Text(_chance,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
         const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children:[
             ElevatedButton(
-              onPressed: (){},
+              onPressed: (){
+                logger.i(_display);
+                logger.i(_chance);
+              },
               child: const Text("Restart"),
             ),
             ElevatedButton(
-              onPressed: (){},
+              onPressed: (){
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context)=> const Menu())
+                  );
+              },
               child: const Text("Menu"),
             ),
           ]

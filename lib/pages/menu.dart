@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tictactoe/pages/friend_vs_friend.dart';
 
 class Menu extends StatefulWidget {
+  const Menu({super.key});
   @override
   MenuUi createState() => MenuUi();
 }
