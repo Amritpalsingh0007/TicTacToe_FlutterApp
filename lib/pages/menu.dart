@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tictactoe/pages/friend_vs_friend.dart';
 
 class Menu extends StatefulWidget {
   @override
@@ -44,7 +45,12 @@ class MenuUi extends State<StatefulWidget> {
                       ),
                     ),
                     TextButton(
-                      onPressed: _onPressed,
+                      onPressed: (){
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context)=> const FriendVsFriend())
+                        );
+                      },
                       style: ButtonStyle(
                           padding: WidgetStateProperty.all(
                               const EdgeInsets.fromLTRB(24.0, 16.0, 24.0, 16.0)),
