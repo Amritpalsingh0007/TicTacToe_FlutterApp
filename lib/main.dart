@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tictactoe/pages/friend_vs_friend.dart';
+import 'package:tictactoe/pages/menu.dart';
 
 
 void main(){
   runApp(
-    const MaterialApp(
-      home: FriendVsFriend(),
+    MaterialApp(
+      home: Menu(),
     ),
   );
 }
